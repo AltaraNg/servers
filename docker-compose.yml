@@ -1,0 +1,32 @@
+version: '3.5'
+#My Sql
+services:
+    db:
+        image: mysql:8.0.26
+        container_name: altara_db
+        environment:
+            # with mysql
+            MYSQL_DATABASE: altara
+            MYSQL_ROOT_PASSWORD: password
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - dbdata:/var/lib/mysql
+        ports:
+            - "4440:3306"
+        networks:
+            - altara-servers
+    #adminer
+    adminer:
+      image: adminer
+      container_name: altara_admin
+      ports:
+        - 4441:8080
+      networks:
+        - altara-servers
+
+networks:
+    altara-servers:
+        external: false
+volumes:
+  dbdata:
