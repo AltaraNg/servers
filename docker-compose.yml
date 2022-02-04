@@ -2,7 +2,7 @@ version: '3.5'
 #My Sql
 services:
     db:
-        image: mysql:8.0.26
+        image: mysql:5.7.22
         container_name: altara_db
         environment:
             # with mysql
@@ -12,6 +12,7 @@ services:
             SERVICE_NAME: mysql
         volumes:
             - dbdata:/var/lib/mysql
+            - ./mysql/my.cnf:/etc/mysql/my.cnf
         ports:
             - "4440:3306"
         networks:
@@ -30,3 +31,4 @@ networks:
         external: false
 volumes:
   dbdata:
+    driver: local
